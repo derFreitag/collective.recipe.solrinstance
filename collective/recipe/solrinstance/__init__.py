@@ -166,11 +166,8 @@ class SolrBase(object):
 
         options['config-template'] = options_orig.get('config-template')
         options["customTemplate"] = "schema-template" in options_orig
-        options["schema-template"] = options_orig.get('schema-template',
-                '%s/schema.xml.tmpl' % self.tpldir)
-        options['stopwords-template'] = options_orig.get(
-            'stopwords-template',
-            '%s/stopwords.txt.tmpl' % self.tpldir)
+        options["schema-template"] = options_orig.get('schema-template', '')
+        options['stopwords-template'] = options_orig.get('stopwords-template', '')
         options['config-destination'] = options_orig.get('config-destination')
         options['schema-destination'] = options_orig.get('schema-destination')
 
@@ -626,7 +623,7 @@ class SolrSingleRecipe(SolrBase):
             )
 
         self.generate_solr_schema(
-            source=self.solropts.get('schema-template'),
+            source=self.solropts.get('schema-template') or '%s/schema.xml.tmpl' % self.tpldir,
             destination=(self.solropts['schema-destination'] or
                 default_config_destination),
             analyzers=self.parse_analyzer(self.solropts),
@@ -634,7 +631,7 @@ class SolrSingleRecipe(SolrBase):
             options=self.solropts)
 
         self.generate_stopwords(
-            source=self.solropts.get('stopwords-template'),
+            source=self.solropts.get('stopwords-template') or '%s/stopwords.txt.tmpl' % self.tpldir,
             destination=(self.solropts['config-destination'] or
                 default_config_destination),
             )
