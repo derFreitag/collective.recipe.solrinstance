@@ -2,8 +2,8 @@
 Change History
 **************
 
-5.3.3 (unreleased)
-==================
+5.3.3.dev0 (2016-04-08)
+=======================
 
 - Fix schema and stop words template location.
   [gforcada]
